@@ -49,8 +49,10 @@ def recognize(file):
             continue
 
 
-def main(query, limit=10):
+def main(query, limit=10, optimizations=True):
     print("querying YouTube...")
+    if optimizations:
+        query = query + " -how -make"
     IDs = find(query, limit)
     URLs = constructURL(IDs)
     titles = []
