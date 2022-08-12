@@ -1,11 +1,12 @@
 from ShazamAPI import Shazam
-from youtubesearchpython import VideosSearch
+from youtubesearchpython import *
 import youtube_dl
 import os
 
 
 def find(query, limit=10):
-    videosSearch = VideosSearch(query, limit=limit)
+    videosSearch = CustomSearch(
+        query, VideoSortOrder.viewCount, limit=limit)
     video_ids = []
     for video in videosSearch.result()["result"]:
         video_ids.append(video["id"])
@@ -38,8 +39,10 @@ def recognize(file):
     shazam = Shazam(bytemp3)
     recognize_generator = shazam.recognizeSong()
     print("recognizing...")
-    while True:
+    """stop if not found after 1 minute"""
+    for i in range(60):
         try:
+            print(next(recognize_generator)[1]["track"]["title"])
             return (next(recognize_generator)[1]["track"]["title"])
             break
         except Exception as e:
@@ -57,3 +60,5 @@ def main(query, limit=10):
         titles.append(title)
         os.remove(path)
     return titles
+
+print(main("cinematic drone videos"))
