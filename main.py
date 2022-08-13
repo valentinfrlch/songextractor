@@ -71,4 +71,4 @@ def main(query, limit=10, optimizations=True):
     return titles
 
 
-print(main("DJI Air2S - All In One", limit=1, optimizations=False))
+main("Stefan Forster Drone", limit=30, optimizations=False)
