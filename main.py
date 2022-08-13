@@ -2,11 +2,12 @@ from ShazamAPI import Shazam
 from youtubesearchpython import *
 import youtube_dl
 import os
+import spotify_addon
 
 
 def find(query, limit=10):
     videosSearch = CustomSearch(
-        query, VideoSortOrder.viewCount, limit=limit)
+        query, VideoSortOrder.relevance, limit=limit)
     video_ids = []
     for video in videosSearch.result()["result"]:
         video_ids.append(video["id"])
@@ -38,12 +39,12 @@ def recognize(file):
     bytemp3 = open(file, "rb").read()
     shazam = Shazam(bytemp3)
     recognize_generator = shazam.recognizeSong()
-    print("recognizing...")
+    print("running recognition...")
     """stop if not found after 1 minute"""
     for i in range(60):
         try:
             print(next(recognize_generator)[1]["track"]["title"])
-            return (next(recognize_generator)[1]["track"]["title"])
+            return (next(recognize_generator)[1]["track"]["title"] + " " + next(recognize_generator)[1]["track"]["subtitle"])
             break
         except Exception as e:
             continue
@@ -60,7 +61,8 @@ def main(query, limit=10, optimizations=True):
         path = downloadMP3(url)
         title = recognize(path)
         titles.append(title)
+        spotify_addon.add_to_playlist(spotify_addon.get_track_id(title))
         os.remove(path)
     return titles
 
-print(main("cinematic drone videos"))
+print(main("cinematic drone videos denis barbas"))
