@@ -13,7 +13,6 @@ def get_track_id(query):
     track_id = sp.search(q=query, type="track")
     return track_id["tracks"]["items"][0]["id"]
 
+
 def add_to_playlist(track_id):
-    """get playlist_id of playlist_query"""
-    playlist_id = sp.playlist_items
     sp.playlist_add_items(playlist_id, track_id)
