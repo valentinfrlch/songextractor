@@ -43,14 +43,19 @@ def recognize(file):
     """stop if not found after 1 minute"""
     for i in range(60):
         try:
-            print(next(recognize_generator)[1]["track"]["title"])
-            return (next(recognize_generator)[1]["track"]["title"] + " " + next(recognize_generator)[1]["track"]["subtitle"])
+            song = next(recognize_generator)[1]["track"]["title"] + " " + next(recognize_generator)[1]["track"]["subtitle"]
+            print(song)
+            return song
             break
         except Exception as e:
             continue
 
 
 def main(query, limit=10, optimizations=True):
+    """delete all file ending in .mp3 or.part"""
+    for file in os.listdir():
+        if file.endswith(".mp3") or file.endswith(".part"):
+            os.remove(file)
     print("querying YouTube...")
     if optimizations:
         query = query + " -how -make"
@@ -65,4 +70,5 @@ def main(query, limit=10, optimizations=True):
         os.remove(path)
     return titles
 
-print(main("cinematic drone videos denis barbas"))
+
+print(main("DJI Air2S - All In One", limit=1, optimizations=False))
