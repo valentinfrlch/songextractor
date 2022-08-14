@@ -29,7 +29,12 @@ def downloadMP3(url):
         }],
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([url])
+        try:
+            ydl.download([url])
+        except youtube_dl.utils.DownloadError:
+            print("skipping...")
+            return None
+
     """get mp3 file path in current directory"""
     mp3_file = [file for file in os.listdir() if file.endswith(".mp3")][0]
     return mp3_file
@@ -43,7 +48,8 @@ def recognize(file):
     """stop if not found after 1 minute"""
     for i in range(60):
         try:
-            song = next(recognize_generator)[1]["track"]["title"] + " " + next(recognize_generator)[1]["track"]["subtitle"]
+            song = next(recognize_generator)[
+                1]["track"]["title"] + " " + next(recognize_generator)[1]["track"]["subtitle"]
             print(song)
             return song
             break
@@ -52,10 +58,6 @@ def recognize(file):
 
 
 def main(query, limit=10, optimizations=True):
-    """delete all file ending in .mp3 or.part"""
-    for file in os.listdir():
-        if file.endswith(".mp3") or file.endswith(".part"):
-            os.remove(file)
     print("querying YouTube...")
     if optimizations:
         query = query + " -how -make"
@@ -63,12 +65,20 @@ def main(query, limit=10, optimizations=True):
     URLs = constructURL(IDs)
     titles = []
     for url in URLs:
+        """delete all file ending in .mp3 or.part"""
+        for file in os.listdir():
+            if file.endswith(".mp3") or file.endswith(".part"):
+                os.remove(file)
         path = downloadMP3(url)
+        if path is None:
+            continue
         title = recognize(path)
+        if title is None:
+            continue
         titles.append(title)
         spotify_addon.add_to_playlist(spotify_addon.get_track_id(title))
         os.remove(path)
     return titles
 
 
-main("Stefan Forster Drone", limit=30, optimizations=False)
+main("Stefan Forster", limit=30, optimizations=True)
