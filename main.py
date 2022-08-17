@@ -60,7 +60,7 @@ def recognize(file):
 def main(query, limit=10, optimizations=True):
     print("querying YouTube...")
     if optimizations:
-        query = query + " -how -make"
+        query = query + " -how"
     IDs = find(query, limit)
     URLs = constructURL(IDs)
     titles = []
@@ -81,4 +81,4 @@ def main(query, limit=10, optimizations=True):
     return titles
 
 
-main("Stefan Forster", limit=30, optimizations=True)
+main("Gopro year in review", limit=15, optimizations=False)
