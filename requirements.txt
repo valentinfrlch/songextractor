@@ -1,0 +1,6 @@
+ShazamAPI
+youtubesearchpython
+youtube_dl
+os
+sys
+spotipy
