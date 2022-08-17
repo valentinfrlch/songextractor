@@ -1,6 +1,5 @@
 ShazamAPI
-youtubesearchpython
+youtube-search-python
 youtube_dl
-os
-sys
 spotipy
+ffmpeg
