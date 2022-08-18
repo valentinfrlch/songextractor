@@ -1,4 +1,4 @@
-# songextractor
+# Songextractor
 ## Looking for music ideas on a topic?
 This little program searches YouTube for provided search term and extracts songs from found videos.
 
@@ -16,4 +16,14 @@ Make sure that you have ffmpeg installed:
 apt install ffmpeg
 ```
 
-Go to https://developer.spotify.com/dashboard/ and create an application
+1. Go to https://developer.spotify.com/dashboard/ and create an application
+2. Note your client_id and your client_secret
+3. Create a playlist in your spotify library and note it's ID (the string right behind the "/"
+4. Note your username
+
+5. Create a credentials.txt file in the songextractor folder
+6. Fill the information from above in the following order and each information on a new line:
+  client_id
+  client_secret
+  playlist_id
+  username
