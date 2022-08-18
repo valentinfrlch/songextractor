@@ -2,4 +2,4 @@ ShazamAPI
 youtube-search-python
 youtube_dl
 spotipy
-ffmpeg
+argparse

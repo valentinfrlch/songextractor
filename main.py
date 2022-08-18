@@ -1,7 +1,8 @@
 from ShazamAPI import Shazam
 from youtubesearchpython import *
 import youtube_dl
-import os, sys
+import os
+import argparse
 import spotify_addon
 
 
@@ -84,13 +85,17 @@ def main(query, limit=10, optimizations=True):
 
 # take query as command line argument
 if __name__ == "__main__":
-    limit = 10
-    optimizations = True
-    
-    query = sys.argv[1]
-    # take limit as optional command line argument
-    if len(sys.argv) > 2:
-        limit = int(sys.argv[2])
-    if len(sys.argv) > 3:
-        optimizations = bool(sys.argv[3])
-    main(query, limit, optimizations)
+    parser = argparse.ArgumentParser(
+        description="query YouTube, detect song(s) and add to them Spotify playlist")
+    parser.add_argument(
+        "-m", help="mode: *query* or path to *mp3* file", default="query")
+    parser.add_argument(
+        "-s", help="query to search for on youtube OR path to .mp3 file", required=True)
+    parser.add_argument("-l", type=int, default=10,
+                        help="number of videos to search")
+    parser.add_argument("-o", type=bool, default=True, help="optimize query")
+    args = parser.parse_args()
+    if args.m == "query":
+        main(args.s, args.l, args.o)
+    else:
+        spotify_addon.add_to_playlist(spotify_addon.get_track_id(recognize(args.s)))
