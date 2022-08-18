@@ -6,12 +6,14 @@ Credit goes to ShazamAPI, youtube_search_python and youtube_dl
 
 
 ## Get started
-run
+Install the required modules:
 ```
 pip install -r requirements.txt
 ```
 
-make sure that you have ffmpeg installed:
+Make sure that you have ffmpeg installed:
 ```
 apt install ffmpeg
 ```
+
+Go to https://developer.spotify.com/dashboard/ and create an application
