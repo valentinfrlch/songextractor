@@ -23,7 +23,9 @@ apt install ffmpeg
 
 5. Create a credentials.txt file in the songextractor folder
 6. Fill the information from above in the following order and each information on a new line:
+```
   client_id
   client_secret
   playlist_id
   username
+```
