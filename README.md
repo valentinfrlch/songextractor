@@ -6,4 +6,4 @@ Credit goes to ShazamAPI, youtube_search_python and youtube_dl
 
 
 ## Get started
-run '''pip install -r requirements.txt'''
+run ```pip install -r requirements.txt```
