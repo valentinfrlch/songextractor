@@ -31,6 +31,7 @@ def downloadMP3(url):
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         try:
+            os.system("clear")
             ydl.download([url])
         except youtube_dl.utils.DownloadError:
             print("skipping...")
@@ -48,6 +49,11 @@ def recognize(file):
     print("running recognition...")
     """stop if not found after 1 minute"""
     for i in range(60):
+        # add a progress bar
+        bar = "=" * i + ">" + " " * (60 - i)
+        percentage = i / 60 * 100
+        os.system("clear")
+        print("Running recognition...\n" + percentage + "\n" + bar)
         try:
             song = next(recognize_generator)[
                 1]["track"]["title"] + " " + next(recognize_generator)[1]["track"]["subtitle"]
