@@ -33,5 +33,5 @@ username
 
 ## Usage
 ```
-python main.py -s "search term for youtube" [-m mode (query/mp3)] [-s (search term OR path to .mp3 file)] [-l (limit of videos to scan)]
+python main.py -s "search term" -m mode: query OR mp3 -s "search term" OR path" -l limit
 ```
