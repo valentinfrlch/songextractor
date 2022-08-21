@@ -5,7 +5,7 @@ This little program searches YouTube for provided search term and extracts songs
 Credit goes to ShazamAPI, youtube_search_python and youtube_dl
 
 
-## Get started
+## Getting started
 Install the required modules:
 ```
 pip install -r requirements.txt
@@ -30,3 +30,6 @@ client_secret
 playlist_id
 username
 ```
+
+## Usage
+python main.py -s "search term for youtube" [-m mode (query/mp3)] [-s (search term OR path to .mp3 file)] [-l (limit of videos to scan)]
