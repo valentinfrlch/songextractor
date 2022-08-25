@@ -4,6 +4,7 @@ import youtube_dl
 import os
 import argparse
 import spotify_addon
+from progressbar import ProgressBar, Bar, Percentage, ETA
 
 
 def find(query, limit=10):
@@ -48,9 +49,10 @@ def recognize(file):
     recognize_generator = shazam.recognizeSong()
     print("running recognition...")
     """stop if not found after 1 minute"""
+    bar = ProgressBar(widgets=[Percentage(), Bar(), ETA()], maxval=60).start()
     for i in range(60):
         # add a progress bar
-        bar = "=" * i + ">" + " " * (60 - i)
+        bar.update(i)
         percentage = i / 60 * 100
         os.system("clear")
         print("Running recognition...\n" + str(percentage) + "\n" + bar)
