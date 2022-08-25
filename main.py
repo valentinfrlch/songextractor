@@ -53,7 +53,7 @@ def recognize(file):
         bar = "=" * i + ">" + " " * (60 - i)
         percentage = i / 60 * 100
         os.system("clear")
-        print("Running recognition...\n" + percentage + "\n" + bar)
+        print("Running recognition...\n" + str(percentage) + "\n" + bar)
         try:
             song = next(recognize_generator)[
                 1]["track"]["title"] + " " + next(recognize_generator)[1]["track"]["subtitle"]
